@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>部活動紹介 - 東京都立小台橋高等学校</title>
+  <title>部活動紹介 - Bento UI</title>
   <style>
     :root {
       --bg-color: #f5f7fa;
       --card-bg: #ffffff;
       --text-main: #333333;
       --text-sub: #666666;
-      --accent-sports: #4a90e2;
-      --accent-culture: #e667af;
-      --border-radius: 16px;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --border-radius: 20px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
@@ -34,18 +32,7 @@
       margin: 0 auto;
     }
 
-    header {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Bento Grid Layout */
+    /* Bento Grid */
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -57,40 +44,69 @@
         grid-template-columns: repeat(4, 1fr);
       }
       .col-span-2 { grid-column: span 2; }
-      .col-span-3 { grid-column: span 3; }
-      .col-span-4 { grid-column: span 4; }
       .row-span-2 { grid-row: span 2; }
     }
 
+    /* 基本のカードスタイル */
     .bento-card {
       background-color: var(--card-bg);
       border-radius: var(--border-radius);
-      padding: 1.5rem;
       box-shadow: var(--shadow);
+      overflow: hidden; /* 画像のはみ出しを防ぐ */
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+    }
+
+    /* カード全体のホバー効果 */
+    .bento-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    /* 画像ラッパーとズームアニメーション */
+    .card-img-wrapper {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 2行分の高さを持つカードの画像調整 */
+    .row-span-2 .card-img-wrapper {
+      height: 320px;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 縦横比を崩さずトリミング */
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ホバー時に画像を拡大（動きをつける） */
+    .bento-card:hover .card-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    /* カードテキスト部分 */
+    .card-content {
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bento-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      flex-grow: 1;
     }
 
     .card-tag {
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
+      color: #4a90e2;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-      display: inline-block;
+      margin-bottom: 0.4rem;
     }
-
-    .sports .card-tag { color: var(--accent-sports); }
-    .culture .card-tag { color: var(--accent-culture); }
 
     .card-title {
       font-size: 1.25rem;
@@ -103,116 +119,50 @@
       color: var(--text-sub);
       line-height: 1.5;
     }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    .tag-item {
-      background-color: #f0f3f7;
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: var(--text-main);
-    }
-
-    /* 特定カード用の特別スタイル */
-    .featured {
-      background: linear-gradient(135deg, #2c3e50, #4a90e2);
-      color: #ffffff;
-    }
-    .featured .card-desc { color: rgba(255, 255, 255, 0.8); }
-    .featured .tag-item {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <header>
-      <h1>部活動・生徒会</h1>
-      <p style="color: var(--text-sub);">東京都立小台橋高等学校の部活動一覧</p>
-    </header>
-
     <div class="bento-grid">
-      <!-- ピックアップ部活動 (大小様々なカード) -->
-      <div class="bento-card sports col-span-2">
-        <div>
-          <span class="card-tag">注目の運動部</span>
-          <h2 class="card-title">卓球部 / バスケ部 / バドミントン部</h2>
-          <p class="card-desc">基礎練習から試合形式まで、初心者・経験者問わず活動中！</p>
-        </div>
-      </div>
 
-      <div class="bento-card sports">
-        <div>
+      <!-- 画像付き大型カード (2列分) -->
+      <div class="bento-card col-span-2">
+        <div class="card-img-wrapper">
+          <!-- ※ srcには実際の画像パスやURLを指定してください -->
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" alt="バスケ部活動風景">
+        </div>
+        <div class="card-content">
           <span class="card-tag">運動部</span>
-          <h2 class="card-title">ゴルフ部</h2>
-          <p class="card-desc">スイングの基本からしっかり身につけられます。</p>
+          <h2 class="card-title">バスケットボール部</h2>
+          <p class="card-desc">チームワークを大切に、日々体育館で練習を重ねています。</p>
         </div>
       </div>
 
-      <div class="bento-card culture">
-        <div>
-          <span class="card-tag">文化部</span>
-          <h2 class="card-title">科学部</h2>
-          <p class="card-desc">日常の疑問を実験を通じて解き明かします。</p>
+      <!-- 単体カード 1 -->
+      <div class="bento-card">
+        <div class="card-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80" alt="軽音楽部">
         </div>
-      </div>
-
-      <div class="bento-card culture col-span-2">
-        <div>
-          <span class="card-tag">注目の文化部</span>
+        <div class="card-content">
+          <span class="card-tag" style="color: #e667af;">文化部</span>
           <h2 class="card-title">軽音楽部</h2>
-          <p class="card-desc">バンド演奏を通じて音楽を楽しむ人気の部活です。</p>
+          <p class="card-desc">文化祭でのステージ発表に向けてバンド練習中！</p>
         </div>
       </div>
 
-      <!-- 運動部 一覧カード -->
-      <div class="bento-card sports col-span-2">
-        <div>
-          <span class="card-tag">運動部 一覧</span>
-          <h2 class="card-title">Sports Clubs</h2>
-          <div class="tag-list">
-            <span class="tag-item">バスケットボール部</span>
-            <span class="tag-item">バレーボール部</span>
-            <span class="tag-item">ソフトテニス部</span>
-            <span class="tag-item">スポーツレクリエーション部</span>
-            <span class="tag-item">ゴルフ部</span>
-            <span class="tag-item">卓球部</span>
-            <span class="tag-item">バドミントン部</span>
-          </div>
+      <!-- 単体カード 2 -->
+      <div class="bento-card">
+        <div class="card-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=500&q=80" alt="科学部">
+        </div>
+        <div class="card-content">
+          <span class="card-tag" style="color: #e667af;">文化部</span>
+          <h2 class="card-title">科学部</h2>
+          <p class="card-desc">身近な疑問をテーマに様々な実験を行っています。</p>
         </div>
       </div>
 
-      <!-- 文化部 一覧カード -->
-      <div class="bento-card culture col-span-2">
-        <div>
-          <span class="card-tag">文化部 一覧</span>
-          <h2 class="card-title">Culture Clubs</h2>
-          <div class="tag-list">
-            <span class="tag-item">軽音楽部</span>
-            <span class="tag-item">科学部</span>
-            <span class="tag-item">美術部</span>
-            <span class="tag-item">演劇部</span>
-            <span class="tag-item">茶道部</span>
-            <span class="tag-item">デジタルイラスト部</span>
-            <span class="tag-item">伝統芸能部</span>
-            <span class="tag-item">吹奏楽部</span>
-            <span class="tag-item">占い研究部</span>
-            <span class="tag-item">パソコン部</span>
-            <span class="tag-item">ダンス部</span>
-            <span class="tag-item">視聴対話語り×ラボ部</span>
-            <span class="tag-item">クラフト部</span>
-            <span class="tag-item">サブカル部</span>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
