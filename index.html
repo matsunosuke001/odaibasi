@@ -121,6 +121,133 @@
     }
   </style>
 </head>
+  <!-- モーダル（ポップアップ表示）用の要素 -->
+  <div id="club-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- モーダルのCSSデザイン -->
+  <style>
+    /* モーダルの背景（暗くする） */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    /* モーダルが開いたとき */
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* モーダル本体 */
+    .modal-content {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      padding: 2rem;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    /* 閉じるボタン */
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #888;
+    }
+
+    /* モーダル内のレイアウト */
+    .modal-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-desc {
+      color: #555;
+      line-height: 1.6;
+    }
+  </style>
+
+  <!-- クリック処理用のJavaScript -->
+  <script>
+    // カードをクリックした時の処理を設定
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.bento-card');
+      
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          // カード内の情報を取得
+          const img = card.querySelector('img');
+          const title = card.querySelector('.card-title')?.innerText || '';
+          const tag = card.querySelector('.card-tag')?.innerText || '';
+          const desc = card.querySelector('.card-desc')?.innerText || '';
+          
+          const imgSrc = img ? img.src : '';
+
+          // モーダルの内容を作成
+          const modalBody = document.getElementById('modal-body');
+          modalBody.innerHTML = `
+            ${imgSrc ? `<img src="${imgSrc}" class="modal-img" alt="${title}">` : ''}
+            <span class="card-tag">${tag}</span>
+            <h2 class="modal-title">${title}</h2>
+            <p class="modal-desc">${desc}</p>
+          `;
+
+          // モーダルを表示
+          document.getElementById('club-modal').classList.add('active');
+        });
+      });
+    });
+
+    // モーダルを閉じる関数
+    function closeModal() {
+      document.getElementById('club-modal').classList.remove('active');
+    }
+
+    // 背景をクリックした時も閉じる
+    document.getElementById('club-modal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'club-modal') {
+        closeModal();
+      }
+    });
+  </script>
 <body>
 
   <div class="container">
