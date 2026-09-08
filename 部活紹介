@@ -130,7 +130,7 @@
       <div class="bento-card col-span-2">
         <div class="card-img-wrapper">
           <!-- ※ srcには実際の画像パスやURLを指定してください -->
-          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" alt="バスケ部活動風景">
+          <img src="https://t3.ftcdn.net/jpg/01/06/44/52/360_F_106445247_seW5SUWJYwHnNZSQLb7H9rVEXjsPN3s5.jpg" alt="バスケ部活動風景">
         </div>
         <div class="card-content">
           <span class="card-tag">運動部</span>
@@ -142,7 +142,7 @@
       <!-- 単体カード 1 -->
       <div class="bento-card">
         <div class="card-img-wrapper">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80" alt="軽音楽部">
+          <img src="https://lh3.googleusercontent.com/rd-gg-dl/AAQ_wbGyr-9oHhT7kpF0-7esG3yP1rEH0IFZlGePd4Ea60I-Gr572nfDc732PUgJY7ESYRNRXemRp26rmyLFpdrq6LmAHz5g8N89iGJQwNwLayxNG6S2vc44b-_aCPLDsxxy3IGO6jgXKYPUr_27CpGfbJEMsVqZpCkIFV7hA8FD14_0ZaRC6AK6EReKnZHYacRgLmDBd3EpHmyA3JUviN6yNi2MJ97Vn1qpw_EGBMKsWYNwjh4lXtvJ43HXTDsmJrjTl9h2_Ftz6q5_r9SfC5eIybqPPOdHuiR44nkENIPWPgDHgzf01NesVv2x_X2VVVoOcWv_OFfDWMgEU6o6yVqbv5OynByfqJaa2O2Yg5ARcgFz39LsGnJyA0PsivqBoVixHim2N5hwhA6v8kHMsApDznKt4cawUFThMVnP5oTIYvyKa-5Sx_iHhoPP6m3N8K52NULhBJ56hP2oqJGgl0ARu6mIoaoYimPGxak-K9XA3nGBJm3M8_zxoSebo_ct1uDiV2hZ_O7c0mkcaEtMJObN6701-R0fNsKsajxDLbw_IyAKaDHuZS0_osnW7PvucEOLgJpitNN2YOGCKuyoD1sgoHvfW5352cu3lmzqbIs6nc2q4uKD2N2wN9Rn_rupHA5UTOsEFv2bdKslmp2DudU76eFqopqfctDlJG47tqcAeWVGqM9Ic9DmVojYplU8UZMHfTEPDMv0GnA25PozoR19xXA_LRDtJXHPLd9OR_SzOLcBw8HMYZNlW3sjFpZoOCgbgg1CG9awqxtw7lnR8LRPGceLOwkGgcz1IAa_czlV9QF9nHTNAutbe6yTwrqUhfJZRsvoB6ImmtQTOsBmRA9E3I3oZrm4B_KFi9cwozKe2n6AF8tSxoj1tevdA911ERrFPaZVppsp8s6V7KXuOS19WtZpPPc4vkc4ImrBPSapsxr1hcZN4_cIaf7F3iCYwbWvWPTHPe_CDQixlEZNhsroXf547P_igNfOvsja4YfQo1LkFnMLVgz-wE5S6bhoDJk8H_oXq8dY6JG7MqEiDjNXHw8t9EW7GFXScr5qzpoyqo3QZwYRrNnbhbuq0hkqkfC4FGGIcirjqvOjbsfdWoBsIkuZEvysAdA_XPAacQbPvC5drnWhx03bao-gfe5pCbQCxxyz0Y-sHWkVKFcTt8zSYHLvnW7bZENf6EZ1vpvaCCWUk5WCsE_jWNSvjIGndzbX4K7tQ9g32EV7M-dGclqbZaGb8X6p7ahSfp-wDxfe2_jVbra41ebIyC_ZB02Rl11Gg9hq=s1024-rj" alt="軽音楽部">
         </div>
         <div class="card-content">
           <span class="card-tag" style="color: #e667af;">文化部</span>
