@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>部活動紹介 - Bento UI</title>
+  <style>
+    :root {
+      --bg-color: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-main: #333333;
+      --text-sub: #666666;
+      --border-radius: 20px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .col-span-2 { grid-column: span 2; }
+      .row-span-2 { grid-row: span 2; }
+    }
+
+    /* 基本のカードスタイル */
+    .bento-card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden; /* 画像のはみ出しを防ぐ */
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+    }
+
+    /* カード全体のホバー効果 */
+    .bento-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    /* 画像ラッパーとズームアニメーション */
+    .card-img-wrapper {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 2行分の高さを持つカードの画像調整 */
+    .row-span-2 .card-img-wrapper {
+      height: 320px;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 縦横比を崩さずトリミング */
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ホバー時に画像を拡大（動きをつける） */
+    .bento-card:hover .card-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    /* カードテキスト部分 */
+    .card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #4a90e2;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="bento-grid">
+
+      <!-- 画像付き大型カード (2列分) -->
+      <div class="bento-card col-span-2">
+        <div class="card-img-wrapper">
+          <!-- ※ srcには実際の画像パスやURLを指定してください -->
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" alt="バスケ部活動風景">
+        </div>
+        <div class="card-content">
+          <span class="card-tag">運動部</span>
+          <h2 class="card-title">バスケットボール部</h2>
+          <p class="card-desc">チームワークを大切に、日々体育館で練習を重ねています。</p>
+        </div>
+      </div>
+
+      <!-- 単体カード 1 -->
+      <div class="bento-card">
+        <div class="card-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80" alt="軽音楽部">
+        </div>
+        <div class="card-content">
+          <span class="card-tag" style="color: #e667af;">文化部</span>
+          <h2 class="card-title">軽音楽部</h2>
+          <p class="card-desc">文化祭でのステージ発表に向けてバンド練習中！</p>
+        </div>
+      </div>
+
+      <!-- 単体カード 2 -->
+      <div class="bento-card">
+        <div class="card-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=500&q=80" alt="科学部">
+        </div>
+        <div class="card-content">
+          <span class="card-tag" style="color: #e667af;">文化部</span>
+          <h2 class="card-title">科学部</h2>
+          <p class="card-desc">身近な疑問をテーマに様々な実験を行っています。</p>
+        </div>
+      </div>
+<!-- バレーボール部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="バレーボール部の画像URLまたはパス" alt="バレーボール部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag">運動部</span>
+    <h2 class="card-title">バレーボール部</h2>
+    <p class="card-desc">基本技術の向上とチームワークを目指して声を掛け合い練習しています。</p>
+  </div>
+</div>
+
+<!-- バドミントン部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="バドミントン部の画像URLまたはパス" alt="バドミントン部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag">運動部</span>
+    <h2 class="card-title">バドミントン部</h2>
+    <p class="card-desc">フットワークやスマッシュ練習など、個々のレベルに合わせて汗を流しています。</p>
+  </div>
+</div>
+
+<!-- 卓球部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="卓球部の画像URLまたはパス" alt="卓球部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag">運動部</span>
+    <h2 class="card-title">卓球部</h2>
+    <p class="card-desc">初心者から経験者まで、ラリーの楽しさを味わいながら練習中！</p>
+  </div>
+</div>
+
+<!-- 美術部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="美術部の画像URLまたはパス" alt="美術部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag" style="color: #e667af;">文化部</span>
+    <h2 class="card-title">美術部</h2>
+    <p class="card-desc">イラストや絵画、立体制作など自由に作品制作に取り組んでいます。</p>
+  </div>
+</div>
+
+<!-- パソコン部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="パソコン部の画像URLまたはパス" alt="パソコン部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag" style="color: #e667af;">文化部</span>
+    <h2 class="card-title">パソコン部</h2>
+    <p class="card-desc">タイピング練習からWeb制作、プログラミングなどを学んでいます。</p>
+  </div>
+</div>
+
+<!-- 吹奏楽部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="吹奏楽部の画像URLまたはパス" alt="吹奏楽部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag" style="color: #e667af;">文化部</span>
+    <h2 class="card-title">吹奏楽部</h2>
+    <p class="card-desc">文化祭や発表会に向け、各種楽器のアンサンブルを楽しんでいます。</p>
+  </div>
+</div>
+
+</body>
+</html>
