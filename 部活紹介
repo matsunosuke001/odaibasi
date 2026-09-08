@@ -162,9 +162,77 @@
           <p class="card-desc">身近な疑問をテーマに様々な実験を行っています。</p>
         </div>
       </div>
-
-    </div>
+<!-- バレーボール部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="バレーボール部の画像URLまたはパス" alt="バレーボール部">
   </div>
+  <div class="card-content">
+    <span class="card-tag">運動部</span>
+    <h2 class="card-title">バレーボール部</h2>
+    <p class="card-desc">基本技術の向上とチームワークを目指して声を掛け合い練習しています。</p>
+  </div>
+</div>
+
+<!-- バドミントン部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="バドミントン部の画像URLまたはパス" alt="バドミントン部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag">運動部</span>
+    <h2 class="card-title">バドミントン部</h2>
+    <p class="card-desc">フットワークやスマッシュ練習など、個々のレベルに合わせて汗を流しています。</p>
+  </div>
+</div>
+
+<!-- 卓球部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="卓球部の画像URLまたはパス" alt="卓球部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag">運動部</span>
+    <h2 class="card-title">卓球部</h2>
+    <p class="card-desc">初心者から経験者まで、ラリーの楽しさを味わいながら練習中！</p>
+  </div>
+</div>
+
+<!-- 美術部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="美術部の画像URLまたはパス" alt="美術部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag" style="color: #e667af;">文化部</span>
+    <h2 class="card-title">美術部</h2>
+    <p class="card-desc">イラストや絵画、立体制作など自由に作品制作に取り組んでいます。</p>
+  </div>
+</div>
+
+<!-- パソコン部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="パソコン部の画像URLまたはパス" alt="パソコン部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag" style="color: #e667af;">文化部</span>
+    <h2 class="card-title">パソコン部</h2>
+    <p class="card-desc">タイピング練習からWeb制作、プログラミングなどを学んでいます。</p>
+  </div>
+</div>
+
+<!-- 吹奏楽部 -->
+<div class="bento-card">
+  <div class="card-img-wrapper">
+    <img src="吹奏楽部の画像URLまたはパス" alt="吹奏楽部">
+  </div>
+  <div class="card-content">
+    <span class="card-tag" style="color: #e667af;">文化部</span>
+    <h2 class="card-title">吹奏楽部</h2>
+    <p class="card-desc">文化祭や発表会に向け、各種楽器のアンサンブルを楽しんでいます。</p>
+  </div>
+</div>
 
 </body>
 </html>
