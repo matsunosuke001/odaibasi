@@ -1,525 +1,499 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>東京都立小台橋高等学校 - 部活動フォトギャラリー</title>
-  <style>
-    :root {
-      --bg-color: #ffffff;
-      --card-bg: #ffffff;
-      --card-radius: 20px;
-      --text-main: #1e293b;
-      --text-sub: #64748b;
-      --accent-color: #0ea5e9;
-      --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.12);
-      --border-color: #e2e8f0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京都立小台橋高等学校 - 部活動フォトギャラリー</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-radius: 8px; /* 角丸を控えめに */
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --accent-color: #0284c7;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.08);
+            --border-color: #cbd5e1;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      min-height: 100vh;
-      padding: 3rem 1.5rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 3rem 1.5rem;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    /* ヘッダー */
-    .header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      max-width: 600px;
-    }
+        /* ヘッダー */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
 
-    .header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      margin-bottom: 0.5rem;
-      color: #0f172a;
-    }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
 
-    .header p {
-      color: var(--text-sub);
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
+        .header p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
 
-    .container {
-      width: 100%;
-      max-width: 1200px;
-    }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
 
-    /* Bento Grid Layout */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      grid-auto-rows: 180px;
-      gap: 1.25rem;
-    }
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-auto-rows: 180px;
+            gap: 1.25rem;
+        }
 
-    @media (min-width: 768px) {
-      .bento-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 200px;
-      }
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: 200px;
+            }
+            .col-span-2 { grid-column: span 2; }
+            .row-span-2 { grid-row: span 2; }
+            .large { grid-column: span 2; grid-row: span 2; }
+        }
 
-      /* サイズ調整用クラス */
-      .col-span-2 { grid-column: span 2; }
-      .row-span-2 { grid-row: span 2; }
-      .large {
-        grid-column: span 2;
-        grid-row: span 2;
-      }
-    }
+        /* カードスタイル */
+        .bento-card {
+            position: relative;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            outline: none;
+        }
 
-    /* カードスタイル */
-    .bento-card {
-      position: relative;
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      outline: none;
-    }
+        .bento-card:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
 
-    .bento-card:focus-visible {
-      outline: 2px solid var(--accent-color);
-      outline-offset: 2px;
-    }
+        /* 画像スタイル (ホバー時の極端な拡大を廃止) */
+        .bento-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    /* 画像スタイル */
-    .bento-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+        /* 画像下部のシンプルなグラデーション */
+        .bento-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+            pointer-events: none;
+        }
 
-    /* 画像下部のグラデーション保護 (白テキストを読みやすくするため) */
-    .bento-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
-      pointer-events: none;
-    }
+        /* カード内のコンテンツ構造 */
+        .card-content {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 1.25rem;
+            right: 1.25rem;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
 
-    /* カード内のコンテンツ構造 */
-    .card-content {
-      position: absolute;
-      bottom: 1.25rem;
-      left: 1.25rem;
-      right: 1.25rem;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      transition: transform 0.3s ease;
-    }
+        .card-tag {
+            align-self: flex-start;
+            padding: 0.2rem 0.6rem;
+            background: #ffffff;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
 
-    .card-tag {
-      align-self: flex-start;
-      padding: 0.25rem 0.75rem;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(4px);
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #0f172a;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+        .card-label {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        }
 
-    .card-label {
-      color: #ffffff;
-      font-size: 1.25rem;
-      font-weight: 700;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-    }
+        /* ホバー時の動きを控えめに調整 */
+        .bento-card:hover {
+            border-color: #64748b;
+            box-shadow: var(--shadow-hover);
+        }
 
-    /* ホバー時の動き */
-    .bento-card:hover {
-      border-color: rgba(14, 165, 233, 0.5);
-      box-shadow: var(--shadow-hover);
-    }
+        /* モーダル */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 1000;
+            padding: 1.5rem;
+        }
 
-    .bento-card:hover img {
-      transform: scale(1.06);
-    }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    .bento-card:hover .card-content {
-      transform: translateY(-3px);
-    }
+        .modal-content {
+            position: relative;
+            background-color: var(--card-bg);
+            border-radius: var(--card-radius);
+            max-width: 540px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
 
-    /* モーダル (白背景用) */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(8px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 1000;
-      padding: 1.5rem;
-    }
+        .modal-content img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
 
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+        .modal-body {
+            padding: 1.75rem;
+        }
 
-    .modal-content {
-      position: relative;
-      background-color: var(--card-bg);
-      border-radius: var(--card-radius);
-      max-width: 540px;
-      width: 100%;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      border: 1px solid var(--border-color);
-      transform: scale(0.95) translateY(10px);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      color: var(--text-main);
-    }
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.75rem;
+        }
 
-    .modal-overlay.active .modal-content {
-      transform: scale(1) translateY(0);
-    }
+        .modal-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-sub);
+        }
 
-    .modal-content img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-    }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #0f172a;
+            font-size: 1.2rem;
+            background: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
 
-    .modal-body {
-      padding: 1.75rem;
-    }
-
-    .modal-header-info {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .modal-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #0f172a;
-    }
-
-    .modal-desc {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--text-sub);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      color: #0f172a;
-      font-size: 1.5rem;
-      background: rgba(255, 255, 255, 0.8);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-      transition: background 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .modal-close:hover {
-      background: #f1f5f9;
-    }
-  </style>
+        .modal-close:hover {
+            background: #f1f5f9;
+        }
+    </style>
 </head>
 <body>
 
-  <header class="header">
-    <h1>東京都立小台橋高等学校</h1>
-    <p>部活動フォトギャラリー</p>
-  </header>
+    <header class="header">
+        <h1>東京都立小台橋高等学校</h1>
+        <p>部活動フォトギャラリー</p>
+    </header>
 
-  <main class="container">
-    <div class="bento-grid">
+    <main class="container">
+        <div class="bento-grid">
+            <!-- バスケットボール部 -->
+            <div class="bento-card large" tabindex="0" role="button" data-tag="運動部" data-title="バスケットボール部" data-desc="チームワークを大切に、日々体育館で練習を重ねています。初心者・経験者問わず歓迎！">
+                <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" alt="バスケットボール部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">バスケットボール部</div>
+                </div>
+            </div>
 
-      <!-- バスケットボール部 -->
-      <div class="bento-card large" tabindex="0" role="button" data-tag="運動部" data-title="バスケットボール部" data-desc="チームワークを大切に、日々体育館で練習を重ねています。初心者・経験者問わず歓迎！">
-        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" alt="バスケットボール部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">バスケットボール部</div>
+            <!-- 軽音楽部 -->
+            <div class="bento-card row-span-2" tabindex="0" role="button" data-tag="文化部" data-title="軽音楽部" data-desc="水曜日と休日以外活動可能！練習のやる気があればいくらでもできる！<br>一部大会でも優勝を収めた強豪であると同時に、一人でやるだけでもOKなアットホームさも持っている良い部活です。">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="軽音楽部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">軽音楽部</div>
+                </div>
+            </div>
+
+            <!-- 科学部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="科学部" data-desc="身近な疑問をテーマに実験を行い、日常の科学を探求しています。">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80" alt="科学部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">科学部</div>
+                </div>
+            </div>
+
+            <!-- バレーボール部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="バレーボール部" data-desc="声を掛け合いながら基本技術と対人レシーブの向上を目指しています。">
+                <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=600&q=80" alt="バレーボール部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">バレーボール部</div>
+                </div>
+            </div>
+
+            <!-- バドミントン部 -->
+            <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="運動部" data-title="バドミントン部" data-desc="フットワークやスマッシュなど、個々の技術を高めながら楽しく汗を流しています。">
+                <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80" alt="バドミントン部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">バドミントン部</div>
+                </div>
+            </div>
+
+            <!-- 卓球部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="卓球部" data-desc="ラリーの楽しさを味わいながら、基本練習と試合形式を並行して実施中。">
+                <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=600&q=80" alt="卓球部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">卓球部</div>
+                </div>
+            </div>
+
+            <!-- 美術部 -->
+            <div class="bento-card row-span-2" tabindex="0" role="button" data-tag="文化部" data-title="美術部" data-desc="イラスト、油絵、立体制作など、それぞれが自由な作品制作に取り組んでいます。">
+                <img src="https://thumb.ac-illust.com/84/846cb73a6af0aa34253f779e121ebb1d_t.jpeg" alt="美術部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">美術部</div>
+                </div>
+            </div>
+
+            <!-- パソコン部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="パソコン部" data-desc="主に情報処理技能検定について学んでいます。<br>資格の勉強を習慣にしたいなら是非。">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="パソコン部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">パソコン部</div>
+                </div>
+            </div>
+
+            <!-- 吹奏楽部 -->
+            <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="文化部" data-title="吹奏楽部" data-desc="コンクールや文化祭での演奏に向けて、日々楽しく練習に励んでいます。">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" alt="吹奏楽部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">吹奏楽部</div>
+                </div>
+            </div>
+
+            <!-- ダンス部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="ダンス部" data-desc="リズム感を養いながら、文化祭ステージでのパフォーマンスを目指します。">
+                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80" alt="ダンス部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">ダンス部</div>
+                </div>
+            </div>
+
+            <!-- ゴルフ部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="ゴルフ部" data-desc="きれいなスイングフォームの習得を目指して基礎練習を行っています。">
+                <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=600&q=80" alt="ゴルフ部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">ゴルフ部</div>
+                </div>
+            </div>
+
+            <!-- ソフトテニス部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="ソフトテニス部" data-desc="コートを走り回り、ペアで息を合わせたプレイを目指して楽しく練習しています。">
+                <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=600&q=80" alt="ソフトテニス部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">ソフトテニス部</div>
+                </div>
+            </div>
+
+            <!-- 演劇部 -->
+            <div class="bento-card row-span-2" tabindex="0" role="button" data-tag="文化部" data-title="演劇部" data-desc="舞台の表から裏まで、みんなで一つの作品を創り上げる喜びを分かち合います。">
+                <img src="https://images.unsplash.com/photo-1507676184212-d0330a15183c?auto=format&fit=crop&w=600&q=80" alt="演劇部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">演劇部</div>
+                </div>
+            </div>
+
+            <!-- スポーツレクリエーション部 -->
+            <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="運動部" data-title="スポーツレクリエーション部" data-desc="様々なスポーツを楽しみながら、基礎体力の向上とリフレッシュを図ります。">
+                <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80" alt="スポーツレクリエーション部">
+                <div class="card-content">
+                    <span class="card-tag">運動部</span>
+                    <div class="card-label">スポーツレクリエーション部</div>
+                </div>
+            </div>
+
+            <!-- 茶道部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="茶道部" data-desc="お点前の作法を学びながら、日本の伝統文化と「おもてなし」の心を身につけます。">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihG9imMIwtDwSC52quu0NeG1_FE2GjoPs7pmkK9y-Jhe_MeWZsXce7vKXP7crXYfnR_2GIfV8WW9A33yMCr2rJyxG0TvdRGBQQUbLpnajhOs19VWQ1UniTFeMjBApwA0HySyGm0x9kT9bY/s800/sadou_school_girl2.png" alt="茶道部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">茶道部</div>
+                </div>
+            </div>
+
+            <!-- デジタルイラスト部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="デジタルイラスト部" data-desc="ペンタブレット等を使用し、デジタルならではの表現方法で作品を描き上げます。">
+                <img src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?auto=format&fit=crop&w=600&q=80" alt="デジタルイラスト部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">デジタルイラスト部</div>
+                </div>
+            </div>
+
+            <!-- 伝統芸能部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="伝統芸能部" data-desc="古くから伝わる芸能に触れ、技術と心を磨きながら楽しく活動しています。">
+                <img src="https://thumb.photo-ac.com/a5/a5932a3291110f7762ffddbf7654a94b_t.jpeg" alt="伝統芸能部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">伝統芸能部</div>
+                </div>
+            </div>
+
+            <!-- 視聴対話語り×ラボ部 -->
+            <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="文化部" data-title="視聴対話語り×ラボ部" data-desc="映像作品の鑑賞などを通し、対話によって感じたことや考えを深め合う新しい形の部活です。">
+                <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80" alt="視聴対話語り×ラボ部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">視聴対話語り×ラボ部</div>
+                </div>
+            </div>
+
+            <!-- 占い研究部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="占い研究部" data-desc="タロットや占星術など、様々な占いの歴史や手法を楽しく研究しています。">
+                <img src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?auto=format&fit=crop&w=600&q=80" alt="占い研究部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">占い研究部</div>
+                </div>
+            </div>
+
+            <!-- クラフト部 -->
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="クラフト部" data-desc="アクセサリーや小物など、自分の手で一からモノづくりを楽しむ活動をしています。">
+                <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&q=80" alt="クラフト部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">クラフト部</div>
+                </div>
+            </div>
+
+            <!-- サブカル部 -->
+            <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="文化部" data-title="サブカル部" data-desc="アニメ、ゲーム、漫画など、幅広いサブカルチャーについて語り合い、知識を共有し合っています。">
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="サブカル部">
+                <div class="card-content">
+                    <span class="card-tag">文化部</span>
+                    <div class="card-label">サブカル部</div>
+                </div>
+            </div>
         </div>
-      </div>
+    </main>
 
-      <!-- 軽音楽部 -->
-      <div class="bento-card row-span-2" tabindex="0" role="button" data-tag="文化部" data-title="軽音楽部" data-desc="水曜日と休日以外活動可能！練習のやる気があればいくらでもできる！<br>一部大会でも優勝を収めた強豪であると同時に、一人でやるだけでもOKなアットホームさも持っている良い部活です。">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="軽音楽部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">軽音楽部</div>
+    <!-- モーダルウィンドウ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" role="dialog" aria-modal="true">
+            <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+            <img id="modalImg" src="" alt="">
+            <div class="modal-body">
+                <div class="modal-header-info">
+                    <span class="card-tag" id="modalTag"></span>
+                </div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-desc" id="modalDesc"></p>
+            </div>
         </div>
-      </div>
-
-      <!-- 科学部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="科学部" data-desc="身近な疑問をテーマに実験を行い、日常の科学を探求しています。">
-        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80" alt="科学部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">科学部</div>
-        </div>
-      </div>
-
-      <!-- バレーボール部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="バレーボール部" data-desc="声を掛け合いながら基本技術と対人レシーブの向上を目指しています。">
-        <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=600&q=80" alt="バレーボール部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">バレーボール部</div>
-        </div>
-      </div>
-
-      <!-- バドミントン部 -->
-      <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="運動部" data-title="バドミントン部" data-desc="フットワークやスマッシュなど、個々の技術を高めながら楽しく汗を流しています。">
-        <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80" alt="バドミントン部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">バドミントン部</div>
-        </div>
-      </div>
-
-      <!-- 卓球部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="卓球部" data-desc="ラリーの楽しさを味わいながら、基本練習と試合形式を並行して実施中。">
-        <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=600&q=80" alt="卓球部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">卓球部</div>
-        </div>
-      </div>
-
-      <!-- 美術部 -->
-      <div class="bento-card row-span-2" tabindex="0" role="button" data-tag="文化部" data-title="美術部" data-desc="イラスト、油絵、立体制作など、それぞれが自由な作品制作に取り組んでいます。">
-        <img src="https://thumb.ac-illust.com/84/846cb73a6af0aa34253f779e121ebb1d_t.jpeg" alt="美術部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">美術部</div>
-        </div>
-      </div>
-
-      <!-- パソコン部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="パソコン部" data-desc="主に情報処理技能検定について学んでいます。<br>資格の勉強を習慣にしたいなら是非。">
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="パソコン部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">パソコン部</div>
-        </div>
-      </div>
-
-      <!-- 吹奏楽部 -->
-      <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="文化部" data-title="吹奏楽部" data-desc="コンクールや文化祭での演奏に向けて、日々楽しく練習に励んでいます。">
-        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" alt="吹奏楽部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">吹奏楽部</div>
-        </div>
-      </div>
-
-      <!-- ダンス部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="ダンス部" data-desc="リズム感を養いながら、文化祭ステージでのパフォーマンスを目指します。">
-        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80" alt="ダンス部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">ダンス部</div>
-        </div>
-      </div>
-
-      <!-- ゴルフ部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="ゴルフ部" data-desc="きれいなスイングフォームの習得を目指して基礎練習を行っています。">
-        <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=600&q=80" alt="ゴルフ部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">ゴルフ部</div>
-        </div>
-      </div>
-
-      <!-- ソフトテニス部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="運動部" data-title="ソフトテニス部" data-desc="コートを走り回り、ペアで息を合わせたプレイを目指して楽しく練習しています。">
-        <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=600&q=80" alt="ソフトテニス部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">ソフトテニス部</div>
-        </div>
-      </div>
-
-      <!-- 演劇部 -->
-      <div class="bento-card row-span-2" tabindex="0" role="button" data-tag="文化部" data-title="演劇部" data-desc="舞台の表から裏まで、みんなで一つの作品を創り上げる喜びを分かち合います。">
-        <img src="https://images.unsplash.com/photo-1507676184212-d0330a15183c?auto=format&fit=crop&w=600&q=80" alt="演劇部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">演劇部</div>
-        </div>
-      </div>
-
-      <!-- スポーツレクリエーション部 -->
-      <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="運動部" data-title="スポーツレクリエーション部" data-desc="様々なスポーツを楽しみながら、基礎体力の向上とリフレッシュを図ります。">
-        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80" alt="スポーツレクリエーション部">
-        <div class="card-content">
-          <span class="card-tag">運動部</span>
-          <div class="card-label">スポーツレクリエーション部</div>
-        </div>
-      </div>
-
-      <!-- 茶道部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="茶道部" data-desc="お点前の作法を学びながら、日本の伝統文化と「おもてなし」の心を身につけます。">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihG9imMIwtDwSC52quu0NeG1_FE2GjoPs7pmkK9y-Jhe_MeWZsXce7vKXP7crXYfnR_2GIfV8WW9A33yMCr2rJyxG0TvdRGBQQUbLpnajhOs19VWQ1UniTFeMjBApwA0HySyGm0x9kT9bY/s800/sadou_school_girl2.png" alt="茶道部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">茶道部</div>
-        </div>
-      </div>
-
-      <!-- デジタルイラスト部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="デジタルイラスト部" data-desc="ペンタブレット等を使用し、デジタルならではの表現方法で作品を描き上げます。">
-        <img src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?auto=format&fit=crop&w=600&q=80" alt="デジタルイラスト部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">デジタルイラスト部</div>
-        </div>
-      </div>
-
-      <!-- 伝統芸能部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="伝統芸能部" data-desc="古くから伝わる芸能に触れ、技術と心を磨きながら楽しく活動しています。">
-        <img src="https://thumb.photo-ac.com/a5/a5932a3291110f7762ffddbf7654a94b_t.jpeg" alt="伝統芸能部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">伝統芸能部</div>
-        </div>
-      </div>
-
-      <!-- 視聴対話語り×ラボ部 -->
-      <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="文化部" data-title="視聴対話語り×ラボ部" data-desc="映像作品の鑑賞などを通し、対話によって感じたことや考えを深め合う新しい形の部活です。">
-        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80" alt="視聴対話語り×ラボ部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">視聴対話語り×ラボ部</div>
-        </div>
-      </div>
-
-      <!-- 占い研究部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="占い研究部" data-desc="タロットや占星術など、様々な占いの歴史や手法を楽しく研究しています。">
-        <img src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?auto=format&fit=crop&w=600&q=80" alt="占い研究部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">占い研究部</div>
-        </div>
-      </div>
-
-      <!-- クラフト部 -->
-      <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="クラフト部" data-desc="アクセサリーや小物など、自分の手で一からモノづくりを楽しむ活動をしています。">
-        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&q=80" alt="クラフト部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">クラフト部</div>
-        </div>
-      </div>
-
-      <!-- サブカル部 (穴埋めのため横長にサイズアップ) -->
-      <div class="bento-card col-span-2" tabindex="0" role="button" data-tag="文化部" data-title="サブカル部" data-desc="アニメ、ゲーム、漫画など、幅広いサブカルチャーについて語り合い、知識を共有します。">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIDd3YVJn1m_pEQmIy8YE89VDPB2fMg24p0tWOJd4aJZqJgshkFu18jujVUvLtZ9dJ4mxa6gESGSTsHkrOamBj5Jp7I1-NaNvsUnz-kL7DtAObyZQrFNgbHWmeQw8lOlHBmLRSSyJTH5bf/s800/comic_jissyaka.png" alt="サブカル部">
-        <div class="card-content">
-          <span class="card-tag">文化部</span>
-          <div class="card-label">サブカル部</div>
-        </div>
-      </div>
-
     </div>
-  </main>
 
-  <!-- 詳細表示モーダル -->
-  <div id="image-modal" class="modal-overlay" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal()" aria-label="閉じる">&times;</button>
-      <img id="modal-img" src="" alt="">
-      <div class="modal-body">
-        <div class="modal-header-info">
-          <span id="modal-tag" class="card-tag" style="border: 1px solid #e2e8f0; box-shadow: none;"></span>
-          <h2 id="modal-title" class="modal-title"></h2>
-        </div>
-        <p id="modal-desc" class="modal-desc"></p>
-      </div>
-    </div>
-  </div>
+    <script>
+        const modal = document.getElementById('modalOverlay');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalTag = document.getElementById('modalTag');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalClose = document.getElementById('modalClose');
 
-  <script>
-    const modal = document.getElementById('image-modal');
-    const modalImg = document.getElementById('modal-img');
-    const modalTitle = document.getElementById('modal-title');
-    const modalTag = document.getElementById('modal-tag');
-    const modalDesc = document.getElementById('modal-desc');
+        function openModal(card) {
+            const img = card.querySelector('img');
+            const title = card.getAttribute('data-title');
+            const tag = card.getAttribute('data-tag');
+            const desc = card.getAttribute('data-desc');
 
-    function openModal(card) {
-      const img = card.querySelector('img');
-      const title = card.getAttribute('data-title');
-      const tag = card.getAttribute('data-tag');
-      const desc = card.getAttribute('data-desc');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            modalTitle.innerText = title;
+            modalTag.innerText = tag;
+            // <br>タグを有効にするため innerHTML に変更
+            modalDesc.innerHTML = desc;
 
-      modalImg.src = img.src;
-      modalImg.alt = title;
-      modalTitle.innerText = title;
-      modalTag.innerText = tag;
-      modalDesc.innerText = desc;
-
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // 背景のスクロールを固定
-    }
-
-    function closeModal() {
-      modal.classList.remove('active');
-      document.body.style.overflow = ''; // スクロール固定解除
-    }
-
-    // カードクリック・キーボード操作
-    document.querySelectorAll('.bento-card').forEach(card => {
-      card.addEventListener('click', () => openModal(card));
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal(card);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-      });
-    });
 
-    // Escキーでモーダルを閉じる
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
-      }
-    });
-  </script>
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('click', () => openModal(card));
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal(card);
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
