@@ -288,7 +288,7 @@ body {
             </div>
 
             <!-- 科学部 -->
-            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="科学部" data-desc="身近な疑問をテーマに実験を行い、日常の科学を探求しています。">
+            <div class="bento-card" tabindex="0" role="button" data-tag="文化部" data-title="科学部" data-desc=<"文化祭がメインイベントの部活動です。文化祭前には活動日が多くなります。<br>月に１～２回、部員の提案した実験や授業の深堀のための活動日。">
                 <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80" alt="科学部">
                 <div class="card-content">
                     <span class="card-tag">文化部</span>
@@ -455,12 +455,12 @@ body {
 
         modalClose.addEventListener('click', () => {
             modalOverlay.classList.remove('active');
+            }
         });
 
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) {
                 modalOverlay.classList.remove('active');
-            }
         });
     </script>
 </body>
