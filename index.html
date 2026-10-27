@@ -427,40 +427,42 @@ body {
         </div>
     </div>
 
-    <script>
-        const cards = document.querySelectorAll('.bento-card');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalClose = document.getElementById('modalClose');
-        const modalImg = document.getElementById('modalImg');
-        const modalTag = document.getElementById('modalTag');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDesc = document.getElementById('modalDesc');
+<script>
+    const cards = document.querySelectorAll('.bento-card');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const modalImg = document.getElementById('modalImg');
+    const modalTag = document.getElementById('modalTag');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
 
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                const img = card.querySelector('img').src;
-                const tag = card.dataset.tag;
-                const title = card.dataset.title;
-                const desc = card.dataset.desc;
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const img = card.querySelector('img').src;
+            const tag = card.dataset.tag;
+            const title = card.dataset.title;
+            const desc = card.dataset.desc;
 
-                modalImg.src = img;
-                modalTag.textContent = tag;
-                modalTitle.textContent = title;
-                modalDesc.innerHTML = desc;
+            modalImg.src = img;
+            modalTag.textContent = tag;
+            modalTitle.textContent = title;
+            modalDesc.innerHTML = desc;
 
-                modalOverlay.classList.add('active');
-            });
+            modalOverlay.classList.add('active');
         });
+    });
 
-        modalClose.addEventListener('click', () => {
+    // 閉じるボタン（×）をクリックしたとき
+    modalClose.addEventListener('click', () => {
+        modalOverlay.classList.remove('active');
+    });
+
+    // モーダル外側の背景をクリックしたとき
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
             modalOverlay.classList.remove('active');
-            }
-        });
-
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                modalOverlay.classList.remove('active');
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>
