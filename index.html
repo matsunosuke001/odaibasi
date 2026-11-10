@@ -90,17 +90,21 @@ body {
 }
 
 /* Bento Grid レイアウト */
+/* Containerを画面いっぱいに広げる */
 .container {
-    width: 100%;
-    max-width: 1200px;
+  width: 100%;
+  max-width: 1800px; /* 必要に応じて 100% や 95% に設定してもOKです */
+  padding: 0 1rem;
 }
 
+/* グリッドのカラム指定を画面幅に合わせてダイナミックにする */
 .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    grid-auto-rows: 240px;
-    grid-auto-flow: dense;
+  display: grid;
+  /* 最小幅を少し広げて、画面幅に応じてきれいに配置されるように調整 */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  grid-auto-rows: 280px; /* カードの高さも少し広げると迫力が出ます */
+  grid-auto-flow: dense;
 }
 
 .bento-card {
